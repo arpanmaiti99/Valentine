@@ -20,14 +20,6 @@ body {
     margin-top: 15vh;
 }
 
-h1 {
-    font-size: 2.5rem;
-}
-
-p {
-    font-size: 1.2rem;
-}
-
 button {
     padding: 12px 25px;
     font-size: 18px;
@@ -45,7 +37,12 @@ button {
 #noBtn {
     background: white;
     color: #ff2e63;
-    position: absolute;
+}
+
+#absYesBtn {
+    background: gold;
+    color: black;
+    display: none;
 }
 
 .heart {
@@ -72,32 +69,35 @@ button {
 
 <div class="container">
     <h1>Hey ❤️</h1>
-    <p>I have a question for you...</p>
-    <h2>Do you love me Srinchita? 💖</h2>
+    <h2>Do you Love me Srinchita? 💖</h2>
 
     <button id="yesBtn">Yes 😍</button>
     <button id="noBtn">No 🙈</button>
+    <button id="absYesBtn">Absolutely Yes 😘</button>
 
-    <div id="result">Yayyy!! 💕 Screenshot this and send it to me 😘</div>
+    <div id="result">Yayyy!! 💕 Screenshot this and send it to me 😍</div>
 </div>
 
 <script>
-const noBtn = document.getElementById("noBtn");
 const yesBtn = document.getElementById("yesBtn");
+const noBtn = document.getElementById("noBtn");
+const absYesBtn = document.getElementById("absYesBtn");
 const result = document.getElementById("result");
 
-// Move NO button
-noBtn.addEventListener("mouseover", () => {
-    const x = Math.random() * (window.innerWidth - 100);
-    const y = Math.random() * (window.innerHeight - 100);
-    noBtn.style.left = x + "px";
-    noBtn.style.top = y + "px";
-});
-
 // YES click
-yesBtn.addEventListener("click", () => {
+yesBtn.onclick = () => {
     result.style.display = "block";
-});
+};
+
+// NO click → show Absolutely Yes
+noBtn.onclick = () => {
+    absYesBtn.style.display = "inline-block";
+};
+
+// Absolutely Yes click
+absYesBtn.onclick = () => {
+    result.style.display = "block";
+};
 
 // Floating hearts
 function createHeart(){
@@ -105,10 +105,8 @@ function createHeart(){
     heart.classList.add("heart");
     heart.innerHTML = "❤️";
     heart.style.left = Math.random()*100 + "vw";
-    heart.style.fontSize = (Math.random()*20+15)+"px";
     document.body.appendChild(heart);
-
-    setTimeout(()=>{heart.remove();},5000);
+    setTimeout(()=>heart.remove(),5000);
 }
 setInterval(createHeart,300);
 </script>
